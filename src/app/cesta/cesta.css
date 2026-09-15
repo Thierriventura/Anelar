@@ -1,0 +1,11 @@
+.cesta-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    text-align: center;
+}
+.cesta-vazia {
+    padding: 3rem 1rem;
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}

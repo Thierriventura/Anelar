@@ -1,0 +1,48 @@
+.pedidos-container {
+    max-width: 900px;
+    margin: 2rem auto;
+}
+
+.pedidos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+.pedidos-table th, .pedidos-table td {
+    padding: 1.2rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.pedidos-table th {
+    font-family: 'Playfair Display', serif;
+    color: var(--dark-green);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.pedidos-table td {
+    color: #444;
+}
+
+.status-badge {
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-badge.processing {
+    background-color: rgba(212, 175, 55, 0.15);
+    color: #b08c2a; /* darker gold for text */
+}
+
+.status-badge.delivered {
+    background-color: rgba(21, 71, 52, 0.15);
+    color: var(--emerald);
+}
