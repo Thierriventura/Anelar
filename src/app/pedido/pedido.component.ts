@@ -7,8 +7,8 @@ import { PedidoService, Pedido } from '../pedido.service';
 @Component({
   imports: [CommonModule, FormsModule],
   selector: 'app-pedido',
-  styleUrl: './pedido.css',
-  templateUrl: './pedido.html',
+  styleUrl: './pedido.component.css',
+  templateUrl: './pedido.component.html',
 })
 export class PedidoComponent implements OnInit {
   pedido: Pedido | undefined;
@@ -74,3 +74,4 @@ export class PedidoComponent implements OnInit {
     setTimeout(() => this.router.navigate(['/lista-pedidos']), 2500);
   }
 }
+

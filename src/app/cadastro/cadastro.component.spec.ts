@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Vitrine } from './vitrine';
+import { Cadastro } from './cadastro';
 
-describe('Vitrine', () => {
-  let component: Vitrine;
-  let fixture: ComponentFixture<Vitrine>;
+describe('Cadastro', () => {
+  let component: Cadastro;
+  let fixture: ComponentFixture<Cadastro>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Vitrine],
+      imports: [Cadastro],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Vitrine);
+    fixture = TestBed.createComponent(Cadastro);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
@@ -19,3 +19,4 @@ describe('Vitrine', () => {
     expect(component).toBeTruthy();
   });
 });
+

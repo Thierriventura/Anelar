@@ -7,10 +7,10 @@ import { AuthService } from '../auth.service';
 @Component({
   imports: [CommonModule, FormsModule],
   selector: 'app-login',
-  styleUrl: './login.css',
-  templateUrl: './login.html',
+  styleUrl: './login.component.css',
+  templateUrl: './login.component.html',
 })
-export class Login {
+export class LoginComponent {
   email = '';
   senha = '';
   erroLogin = '';
@@ -39,3 +39,4 @@ export class Login {
     }
   }
 }
+

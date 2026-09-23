@@ -1,0 +1,64 @@
+<div class="top-bar">
+    <p>SEMANA DO CLIENTE COM 20% OFF + <strong>FRETE GRÁTIS</strong> EM TODOS OS PEDIDOS</p>
+</div>
+
+<header class="main-header">
+    <div class="logo-container">
+        <a routerLink="/vitrine" class="logo-link">
+            <h1 class="logo-text">ANELAR</h1>
+        </a>
+    </div>
+    
+    <div class="header-bottom">
+        <nav class="main-nav" aria-label="Navegação Principal">
+            <a routerLink="/vitrine" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Vitrine</a>
+            <a routerLink="/cesta" routerLinkActive="active" id="cart-link">Cesta</a>
+            <a routerLink="/lista-pedidos" routerLinkActive="active">Meus Pedidos</a>
+            
+            @if (!authService.estaLogado) {
+                <a routerLink="/login" routerLinkActive="active">Login / Cadastro</a>
+            }
+        </nav>
+
+        @if (authService.estaLogado) {
+            <div class="user-avatar-wrapper">
+                <button class="user-avatar" aria-label="Meu perfil" title="Meu perfil" (click)="logout()">
+                    {{ authService.usuarioLogado()?.iniciais }}
+                </button>
+                <div class="avatar-tooltip" role="menu">
+                    <span class="avatar-nome">{{ authService.usuarioLogado()?.nome }}</span>
+                    <button class="btn-logout" (click)="logout()" role="menuitem">Sair</button>
+                </div>
+            </div>
+        }
+    </div>
+</header>
+
+<main class="content-area">
+    <router-outlet />
+</main>
+
+@if (cestaService.itensNaCesta().length > 0) {
+    <a class="mini-cart-widget" routerLink="/cesta" aria-label="Acessar Cesta">
+        <div class="mini-cart-thumbnails">
+            @for (item of cestaService.itensNaCesta().slice(0, 3); track item.id; let i = $index) {
+                <img [src]="item.img" [alt]="item.nome" class="mini-thumb" [style.zIndex]="3 - i">
+            }
+            @if (cestaService.itensNaCesta().length > 3) {
+                <div class="mini-thumb-more" aria-hidden="true">+{{ cestaService.itensNaCesta().length - 3 }}</div>
+            }
+        </div>
+        <div class="mini-cart-info">
+            <span class="mini-cart-label">Sua Cesta</span>
+            <span class="mini-cart-total">{{ cestaService.total().toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</span>
+        </div>
+    </a>
+}
+
+<footer class="main-footer">
+    <div class="footer-content">
+        <p><strong>Telefone:</strong> (11) 2344-2344 | <strong>Email:</strong> contato&#64;anelar.com.br</p>
+        <p>Rua Frei João, 59 - São Paulo, SP</p>
+        <p class="copyright">&copy; 2026 Anelar Joias. Todos os direitos reservados.</p>
+    </div>
+</footer>

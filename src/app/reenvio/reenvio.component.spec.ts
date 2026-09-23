@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ResultaBusca } from './resulta-busca';
+import { Reenvio } from './reenvio';
 
-describe('ResultaBusca', () => {
-  let component: ResultaBusca;
-  let fixture: ComponentFixture<ResultaBusca>;
+describe('Reenvio', () => {
+  let component: Reenvio;
+  let fixture: ComponentFixture<Reenvio>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ResultaBusca],
+      imports: [Reenvio],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ResultaBusca);
+    fixture = TestBed.createComponent(Reenvio);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
@@ -19,3 +19,4 @@ describe('ResultaBusca', () => {
     expect(component).toBeTruthy();
   });
 });
+

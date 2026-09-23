@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Cesta } from './cesta';
+import { Vitrine } from './vitrine';
 
-describe('Cesta', () => {
-  let component: Cesta;
-  let fixture: ComponentFixture<Cesta>;
+describe('Vitrine', () => {
+  let component: Vitrine;
+  let fixture: ComponentFixture<Vitrine>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Cesta],
+      imports: [Vitrine],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(Cesta);
+    fixture = TestBed.createComponent(Vitrine);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
@@ -19,3 +19,4 @@ describe('Cesta', () => {
     expect(component).toBeTruthy();
   });
 });
+

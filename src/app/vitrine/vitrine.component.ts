@@ -6,10 +6,10 @@ import { CestaService, Produto } from '../cesta.service';
 @Component({
   imports: [CommonModule, FormsModule],
   selector: 'app-vitrine',
-  styleUrl: './vitrine.css',
-  templateUrl: './vitrine.html',
+  styleUrl: './vitrine.component.css',
+  templateUrl: './vitrine.component.html',
 })
-export class Vitrine {
+export class VitrineComponent {
   produtos: Produto[] = [
     { id: 1, nome: 'Colar Gota de Esmeralda', desc: 'Ouro branco 18k e diamantes', preco: 5500, img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBQSMeVA-Gdz-hFHJljuGW0d4fe7fyGwrWCXRDCqFMuXrknQhztRjDsIQ&s=10' },
     { id: 2, nome: 'Anel Solitário Imperial', desc: 'Ouro amarelo 18k, diamante 1ct', preco: 3800, img: 'https://images.tcdn.com.br/img/img_prod/1305187/anel_de_noivado_imperial_1199_1_cd59876e26f98f291f35a1051be67a7d.jpg' },
@@ -67,3 +67,4 @@ export class Vitrine {
     }
   }
 }
+

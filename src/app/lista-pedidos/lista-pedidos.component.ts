@@ -5,10 +5,10 @@ import { PedidoService, Pedido } from '../pedido.service';
 @Component({
   imports: [],
   selector: 'app-lista-pedidos',
-  styleUrl: './lista-pedidos.css',
-  templateUrl: './lista-pedidos.html',
+  styleUrl: './lista-pedidos.component.css',
+  templateUrl: './lista-pedidos.component.html',
 })
-export class ListaPedidos {
+export class ListaPedidosComponent {
   constructor(private pedidoService: PedidoService, private router: Router) {}
 
   get pedidos(): Pedido[] {
@@ -23,3 +23,4 @@ export class ListaPedidos {
     this.router.navigate(['/pedido'], { queryParams: { id: pedidoId } });
   }
 }
+

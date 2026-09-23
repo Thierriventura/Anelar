@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 
 export interface Produto {
   id: number;
@@ -12,30 +12,42 @@ export interface Produto {
   providedIn: 'root'
 })
 export class CestaService {
-  private itensNaCesta: Produto[] = [];
+  private _itensNaCesta = signal<Produto[]>([]);
+  
+  readonly itensNaCesta = this._itensNaCesta.asReadonly();
+  
+  readonly total = computed(() => 
+    this._itensNaCesta().reduce((acc, produto) => acc + produto.preco, 0)
+  );
 
   constructor() { }
 
   adicionarItem(produto: Produto) {
-    this.itensNaCesta.push(produto);
+    this._itensNaCesta.update(itens => [...itens, produto]);
   }
 
   removerItem(produtoId: number) {
-    const index = this.itensNaCesta.findIndex(p => p.id === produtoId);
-    if (index > -1) {
-      this.itensNaCesta.splice(index, 1);
-    }
+    this._itensNaCesta.update(itens => {
+      const index = itens.findIndex(p => p.id === produtoId);
+      if (index > -1) {
+        const novosItens = [...itens];
+        novosItens.splice(index, 1);
+        return novosItens;
+      }
+      return itens;
+    });
   }
 
   obterItens(): Produto[] {
-    return this.itensNaCesta;
+    return this._itensNaCesta();
   }
 
   obterTotal(): number {
-    return this.itensNaCesta.reduce((total, produto) => total + produto.preco, 0);
+    return this.total();
   }
 
   limparCesta() {
-    this.itensNaCesta = [];
+    this._itensNaCesta.set([]);
   }
 }
+

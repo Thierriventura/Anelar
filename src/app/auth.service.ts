@@ -51,3 +51,4 @@ export class AuthService {
     return this._usuarioLogado() !== null;
   }
 }
+

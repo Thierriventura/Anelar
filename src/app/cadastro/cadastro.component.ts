@@ -7,10 +7,10 @@ import { AuthService } from '../auth.service';
 @Component({
   imports: [CommonModule, FormsModule],
   selector: 'app-cadastro',
-  styleUrl: './cadastro.css',
-  templateUrl: './cadastro.html',
+  styleUrl: './cadastro.component.css',
+  templateUrl: './cadastro.component.html',
 })
-export class Cadastro {
+export class CadastroComponent {
   nome = '';
   cpf = '';
   nascimento = '';
@@ -119,3 +119,4 @@ export class Cadastro {
     setTimeout(() => this.router.navigate(['/login']), 2000);
   }
 }
+

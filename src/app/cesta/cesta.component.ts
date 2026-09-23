@@ -7,10 +7,10 @@ import { PedidoService } from '../pedido.service';
 @Component({
   imports: [CommonModule],
   selector: 'app-cesta',
-  styleUrl: './cesta.css',
-  templateUrl: './cesta.html',
+  styleUrl: './cesta.component.css',
+  templateUrl: './cesta.component.html',
 })
-export class Cesta {
+export class CestaComponent {
   constructor(
     private cestaService: CestaService,
     private pedidoService: PedidoService,
@@ -35,3 +35,4 @@ export class Cesta {
     this.router.navigate(['/lista-pedidos']);
   }
 }
+

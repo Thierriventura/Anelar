@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal, computed } from '@angular/core';
 import { Produto } from './cesta.service';
 
 export interface Pedido {
@@ -15,8 +15,10 @@ export interface Pedido {
   providedIn: 'root'
 })
 export class PedidoService {
-  private pedidos: Pedido[] = [];
+  private _pedidos = signal<Pedido[]>([]);
   private contador = 10024;
+  
+  readonly pedidos = this._pedidos.asReadonly();
 
   aprovarPedido(itens: Produto[], total: number): Pedido {
     const novoPedido: Pedido = {
@@ -26,24 +28,31 @@ export class PedidoService {
       total,
       itens: [...itens]
     };
-    this.pedidos.unshift(novoPedido);
+    
+    this._pedidos.update(pedidosAtual => [novoPedido, ...pedidosAtual]);
     return novoPedido;
   }
 
   obterPedidos(): Pedido[] {
-    return this.pedidos;
+    return this._pedidos();
   }
 
   obterPedidoPorId(id: string): Pedido | undefined {
-    return this.pedidos.find(p => p.id === id);
+    return this._pedidos().find(p => p.id === id);
   }
 
   confirmarPagamento(id: string, formaPagamento: string, parcelas?: number): void {
-    const pedido = this.obterPedidoPorId(id);
-    if (pedido) {
-      pedido.formaPagamento = formaPagamento;
-      pedido.parcelas = parcelas;
-      pedido.status = 'Pagamento Confirmado';
-    }
+    this._pedidos.update(pedidos => pedidos.map(p => {
+      if (p.id === id) {
+        return {
+          ...p,
+          formaPagamento,
+          parcelas,
+          status: 'Pagamento Confirmado'
+        };
+      }
+      return p;
+    }));
   }
 }
+
