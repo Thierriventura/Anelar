@@ -28,6 +28,25 @@
     color: #444;
 }
 
+.pedido-row {
+    transition: background 0.2s;
+}
+
+.pedido-row:hover {
+    background-color: rgba(212, 175, 55, 0.05);
+}
+
+.pedido-id {
+    font-family: 'Playfair Display', serif;
+    color: var(--dark-green);
+    font-weight: 700;
+}
+
+.pedido-total {
+    font-weight: 700;
+    color: var(--gold, #d4af37);
+}
+
 .status-badge {
     padding: 0.4rem 0.8rem;
     border-radius: 20px;
@@ -39,10 +58,83 @@
 
 .status-badge.processing {
     background-color: rgba(212, 175, 55, 0.15);
-    color: #b08c2a; /* darker gold for text */
+    color: #b08c2a;
 }
 
 .status-badge.delivered {
     background-color: rgba(21, 71, 52, 0.15);
     color: var(--emerald);
+}
+
+.status-badge.awaiting {
+    background-color: rgba(30, 90, 160, 0.12);
+    color: #1a4f9c;
+}
+
+.pedidos-vazio {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #888;
+}
+
+.pedidos-vazio p {
+    margin: 0.4rem 0;
+    font-size: 1rem;
+}
+
+.btn-gold-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 1.8rem;
+    background-color: var(--gold, #d4af37);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    transition: opacity 0.2s;
+}
+
+.btn-gold-link:hover {
+    opacity: 0.85;
+}
+
+/* Status badges */
+.status-badge.confirmed {
+    background-color: rgba(21, 71, 52, 0.12);
+    color: var(--dark-green, #1a3c34);
+}
+
+/* Botão Pagar */
+.pedido-acoes {
+    text-align: right;
+    white-space: nowrap;
+}
+
+.btn-pagar {
+    background: var(--dark-green, #1a3c34);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.15s;
+    border-radius: 2px;
+}
+
+.btn-pagar:hover {
+    background: var(--gold, #d4af37);
+    transform: translateY(-1px);
+}
+
+.pago-label {
+    font-size: 0.8rem;
+    color: var(--dark-green, #1a3c34);
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { PedidoService, Pedido } from '../pedido.service';
 
 @Component({
   imports: [],
@@ -6,4 +8,18 @@ import { Component } from '@angular/core';
   styleUrl: './lista-pedidos.css',
   templateUrl: './lista-pedidos.html',
 })
-export class ListaPedidos {}
+export class ListaPedidos {
+  constructor(private pedidoService: PedidoService, private router: Router) {}
+
+  get pedidos(): Pedido[] {
+    return this.pedidoService.obterPedidos();
+  }
+
+  formatarMoeda(valor: number): string {
+    return valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+  }
+
+  irParaPagamento(pedidoId: string) {
+    this.router.navigate(['/pedido'], { queryParams: { id: pedidoId } });
+  }
+}

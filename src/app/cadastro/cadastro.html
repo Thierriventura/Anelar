@@ -3,79 +3,104 @@
         <h2 class="form-title">Criar Conta</h2>
         <p class="form-subtitle">Junte-se a nós para uma experiência exclusiva.</p>
 
-        <form class="elegant-form">
+        @if (sucesso) {
+        <div class="alert-sucesso">
+            ✓ Cadastro realizado com sucesso! Redirecionando para o login...
+        </div>
+        }
+
+        <form class="elegant-form" (ngSubmit)="concluirCadastro()" #f="ngForm" novalidate>
             <h3 class="section-title">Dados Pessoais</h3>
-            
+
             <div class="input-row">
-                <div class="input-group full-width">
+                <div class="input-group full-width" [class.has-error]="erros['nome']">
                     <label for="nome">Nome Completo</label>
-                    <input type="text" id="nome" placeholder="Como deseja ser chamado(a)?" required>
-                </div>
-            </div>
-            
-            <div class="input-row">
-                <div class="input-group">
-                    <label for="cpf">CPF</label>
-                    <input type="text" id="cpf" placeholder="000.000.000-00" required>
-                </div>
-                <div class="input-group">
-                    <label for="nascimento">Data de Nascimento</label>
-                    <input type="date" id="nascimento" required>
+                    <input type="text" id="nome" [(ngModel)]="nome" name="nome"
+                        placeholder="Como deseja ser chamado(a)?">
+                    @if (erros['nome']) { <span class="erro-msg">{{ erros['nome'] }}</span> }
                 </div>
             </div>
 
             <div class="input-row">
-                <div class="input-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="seu@melhoremail.com.br" required>
+                <div class="input-group" [class.has-error]="erros['cpf']">
+                    <label for="cpf">CPF</label>
+                    <input type="text" id="cpf" [(ngModel)]="cpf" name="cpf" placeholder="000.000.000-00"
+                        maxlength="14">
+                    @if (erros['cpf']) { <span class="erro-msg">{{ erros['cpf'] }}</span> }
                 </div>
-                <div class="input-group">
+                <div class="input-group" [class.has-error]="erros['nascimento']">
+                    <label for="nascimento">Data de Nascimento</label>
+                    <input type="date" id="nascimento" [(ngModel)]="nascimento" name="nascimento">
+                    @if (erros['nascimento']) { <span class="erro-msg">{{ erros['nascimento'] }}</span> }
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-group" [class.has-error]="erros['email']">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" [(ngModel)]="email" name="email"
+                        placeholder="seu@melhoremail.com.br">
+                    @if (erros['email']) { <span class="erro-msg">{{ erros['email'] }}</span> }
+                </div>
+                <div class="input-group" [class.has-error]="erros['telefone']">
                     <label for="telefone">Telefone / Celular</label>
-                    <input type="tel" id="telefone" placeholder="(11) 90000-0000" required>
+                    <input type="tel" id="telefone" [(ngModel)]="telefone" name="telefone"
+                        placeholder="(11) 90000-0000">
+                    @if (erros['telefone']) { <span class="erro-msg">{{ erros['telefone'] }}</span> }
                 </div>
             </div>
 
             <h3 class="section-title mt-4">Endereço de Entrega</h3>
-            
+
             <div class="input-row">
-                <div class="input-group">
+                <div class="input-group" [class.has-error]="erros['cep']">
                     <label for="cep">CEP</label>
-                    <input type="text" id="cep" placeholder="00000-000" required>
+                    <input type="text" id="cep" [(ngModel)]="cep" name="cep" placeholder="00000-000" maxlength="9">
+                    @if (erros['cep']) { <span class="erro-msg">{{ erros['cep'] }}</span> }
                 </div>
-                <div class="input-group">
+                <div class="input-group" [class.has-error]="erros['cidade']">
                     <label for="cidade">Cidade / Estado</label>
-                    <input type="text" id="cidade" placeholder="Ex: São Paulo - SP" required>
+                    <input type="text" id="cidade" [(ngModel)]="cidade" name="cidade"
+                        placeholder="Ex: São Paulo - SP">
+                    @if (erros['cidade']) { <span class="erro-msg">{{ erros['cidade'] }}</span> }
                 </div>
             </div>
 
             <div class="input-row">
-                <div class="input-group full-width">
+                <div class="input-group full-width" [class.has-error]="erros['rua']">
                     <label for="rua">Logradouro (Rua, Avenida, etc)</label>
-                    <input type="text" id="rua" placeholder="Nome da sua rua" required>
+                    <input type="text" id="rua" [(ngModel)]="rua" name="rua" placeholder="Nome da sua rua">
+                    @if (erros['rua']) { <span class="erro-msg">{{ erros['rua'] }}</span> }
                 </div>
             </div>
 
             <div class="input-row">
-                <div class="input-group">
+                <div class="input-group" [class.has-error]="erros['numero']">
                     <label for="numero">Número</label>
-                    <input type="text" id="numero" placeholder="Nº" required>
+                    <input type="text" id="numero" [(ngModel)]="numero" name="numero" placeholder="Nº">
+                    @if (erros['numero']) { <span class="erro-msg">{{ erros['numero'] }}</span> }
                 </div>
                 <div class="input-group">
                     <label for="complemento">Complemento (Opcional)</label>
-                    <input type="text" id="complemento" placeholder="Apto, Bloco, Casa 2">
+                    <input type="text" id="complemento" [(ngModel)]="complemento" name="complemento"
+                        placeholder="Apto, Bloco, Casa 2">
                 </div>
             </div>
 
             <h3 class="section-title mt-4">Segurança</h3>
-            
+
             <div class="input-row">
-                <div class="input-group">
+                <div class="input-group" [class.has-error]="erros['senha']">
                     <label for="senha">Senha</label>
-                    <input type="password" id="senha" placeholder="Crie uma senha forte" required>
+                    <input type="password" id="senha" [(ngModel)]="senha" name="senha"
+                        placeholder="Mín. 8 caracteres">
+                    @if (erros['senha']) { <span class="erro-msg">{{ erros['senha'] }}</span> }
                 </div>
-                <div class="input-group">
+                <div class="input-group" [class.has-error]="erros['confirmaSenha']">
                     <label for="confirmaSenha">Confirme a Senha</label>
-                    <input type="password" id="confirmaSenha" placeholder="Repita a senha" required>
+                    <input type="password" id="confirmaSenha" [(ngModel)]="confirmaSenha" name="confirmaSenha"
+                        placeholder="Repita a senha">
+                    @if (erros['confirmaSenha']) { <span class="erro-msg">{{ erros['confirmaSenha'] }}</span> }
                 </div>
             </div>
 

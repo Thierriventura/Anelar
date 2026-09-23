@@ -1,6 +1,13 @@
 <div class="jewelry-card pedidos-container">
     <h2 class="page-title">Meus Pedidos</h2>
-    
+
+    @if (pedidos.length === 0) {
+    <div class="pedidos-vazio">
+        <p>Nenhum pedido aprovado ainda.</p>
+        <p>Explore nossas coleções e finalize sua compra.</p>
+        <a href="/vitrine" class="btn-gold-link">Ver Vitrine</a>
+    </div>
+    } @else {
     <table class="pedidos-table">
         <thead>
             <tr>
@@ -8,21 +15,33 @@
                 <th>Data</th>
                 <th>Status</th>
                 <th>Valor Total</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>#10023</td>
-                <td>10/09/2026</td>
-                <td><span class="status-badge processing">Em processamento</span></td>
-                <td>R$ 15.900,00</td>
+            @for (pedido of pedidos; track pedido.id) {
+            <tr class="pedido-row">
+                <td class="pedido-id">{{ pedido.id }}</td>
+                <td>{{ pedido.data }}</td>
+                <td>
+                    <span class="status-badge" [class.awaiting]="pedido.status === 'Aguardando Pagamento'"
+                        [class.confirmed]="pedido.status === 'Pagamento Confirmado'">
+                        {{ pedido.status }}
+                    </span>
+                </td>
+                <td class="pedido-total">{{ formatarMoeda(pedido.total) }}</td>
+                <td class="pedido-acoes">
+                    @if (pedido.status === 'Aguardando Pagamento') {
+                    <button class="btn-pagar" (click)="irParaPagamento(pedido.id)">
+                        Pagar
+                    </button>
+                    } @else {
+                    <span class="pago-label">✓ Pago</span>
+                    }
+                </td>
             </tr>
-            <tr>
-                <td>#09981</td>
-                <td>15/08/2026</td>
-                <td><span class="status-badge delivered">Entregue</span></td>
-                <td>R$ 22.500,00</td>
-            </tr>
+            }
         </tbody>
     </table>
+    }
 </div>

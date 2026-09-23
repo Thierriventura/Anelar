@@ -1,35 +1,37 @@
 <div class="vitrine-container">
     <h2 class="page-title">As Joias Mais Vendidas</h2>
 
-    <div class="products-grid">
-        <!-- Product 1 -->
-        <div class="jewelry-card product-card">
-            <img src="https://images.unsplash.com/photo-1599643477873-fc03df1253c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Colar Gota de Esmeralda" class="product-image">
-            <h3 class="product-name">Colar Gota de Esmeralda</h3>
-            <p class="product-desc">Ouro branco 18k e diamantes</p>
-            <p class="product-price">R$ 15.900,00</p>
-            <button class="btn-primary btn-full">Escolha Aqui</button>
-        </div>
-
-        <!-- Product 2 -->
-        <div class="jewelry-card product-card">
-            <img src="https://images.unsplash.com/photo-1605100804763-247f67b2548e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Anel Solitário Imperial" class="product-image">
-            <h3 class="product-name">Anel Solitário Imperial</h3>
-            <p class="product-desc">Ouro amarelo 18k, diamante 1ct</p>
-            <p class="product-price">R$ 22.500,00</p>
-            <button class="btn-primary btn-full">Escolha Aqui</button>
-        </div>
-
-        <!-- Product 3 -->
-        <div class="jewelry-card product-card">
-            <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                alt="Pulseira Riviera" class="product-image">
-            <h3 class="product-name">Pulseira Riviera</h3>
-            <p class="product-desc">Ouro branco 18k com safiras</p>
-            <p class="product-price">R$ 18.200,00</p>
-            <button class="btn-primary btn-full">Escolha Aqui</button>
-        </div>
+    <!-- Barra de busca -->
+    <div class="search-bar-container">
+        <input type="text" [(ngModel)]="termoBusca" (ngModelChange)="aoMudarBusca()" placeholder="Buscar joias..." class="search-input">
     </div>
+
+    <div class="products-grid">
+        @for (produto of produtosPaginados; track produto.id) {
+        <div class="jewelry-card product-card">
+            <img [src]="produto.img"
+                [alt]="produto.nome" class="product-image">
+            <h3 class="product-name">{{produto.nome}}</h3>
+            <p class="product-desc">{{produto.desc}}</p>
+            <p class="product-price">{{produto.preco.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}}</p>
+            <button class="btn-primary btn-full" (click)="adicionarNaCesta(produto)">Escolha Aqui</button>
+        </div>
+        }
+        @empty {
+            <p class="no-results">Nenhum produto encontrado.</p>
+        }
+    </div>
+
+    <!-- Paginação -->
+    @if (totalPaginas > 1) {
+    <div class="pagination">
+        <button class="btn-page" [disabled]="paginaAtual === 1" (click)="mudarPagina(paginaAtual - 1)">&laquo; Anterior</button>
+        
+        @for (pagina of arrayPaginas; track pagina) {
+            <button class="btn-page" [class.active]="pagina === paginaAtual" (click)="mudarPagina(pagina)">{{ pagina }}</button>
+        }
+        
+        <button class="btn-page" [disabled]="paginaAtual === totalPaginas" (click)="mudarPagina(paginaAtual + 1)">Próximo &raquo;</button>
+    </div>
+    }
 </div>
