@@ -18,6 +18,9 @@ export class AppComponent {
     public authService: AuthService
   ) { }
 
+  /**
+   * Realiza o logout do usuário atual delegando a ação para o AuthService.
+   */
   logout() {
     this.authService.logout();
   }

@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "web05": {
+    "Anelar": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -65,10 +65,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "web05:build:production"
+              "buildTarget": "Anelar:build:production"
             },
             "development": {
-              "buildTarget": "web05:build:development"
+              "buildTarget": "Anelar:build:development"
             }
           },
           "defaultConfiguration": "development"

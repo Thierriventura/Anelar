@@ -22,10 +22,18 @@ export class CestaService {
 
   constructor() { }
 
+  /**
+   * Adiciona um produto à cesta.
+   * @param produto Produto a ser adicionado
+   */
   adicionarItem(produto: Produto) {
     this._itensNaCesta.update(itens => [...itens, produto]);
   }
 
+  /**
+   * Remove a primeira ocorrência de um produto na cesta a partir do seu ID.
+   * @param produtoId ID do produto a ser removido
+   */
   removerItem(produtoId: number) {
     this._itensNaCesta.update(itens => {
       const index = itens.findIndex(p => p.id === produtoId);
@@ -38,14 +46,25 @@ export class CestaService {
     });
   }
 
+  /**
+   * Retorna os itens atualmente na cesta.
+   * @returns Array de produtos adicionados
+   */
   obterItens(): Produto[] {
     return this._itensNaCesta();
   }
 
+  /**
+   * Retorna o valor total da cesta somando o preço dos itens.
+   * @returns Valor total numérico
+   */
   obterTotal(): number {
     return this.total();
   }
 
+  /**
+   * Remove todos os itens da cesta, deixando-a vazia.
+   */
   limparCesta() {
     this._itensNaCesta.set([]);
   }

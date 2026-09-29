@@ -18,6 +18,11 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  /**
+   * Tenta realizar o login do usuário verificando os dados no AuthService.
+   * Em caso de sucesso, redireciona para a vitrine. Em caso de falha, 
+   * conta as tentativas e exibe mensagens de erro.
+   */
   entrar() {
     this.erroLogin = '';
 

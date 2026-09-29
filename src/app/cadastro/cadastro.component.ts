@@ -29,12 +29,23 @@ export class CadastroComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+  /**
+   * Gera as iniciais do usuário com base no nome completo fornecido.
+   * Exemplo: "João Silva" -> "JS"
+   * @param nome Nome completo do usuário
+   * @returns String contendo as iniciais em maiúsculo
+   */
   private gerarIniciais(nome: string): string {
     const partes = nome.trim().split(' ');
     if (partes.length === 1) return partes[0].charAt(0).toUpperCase();
     return (partes[0].charAt(0) + partes[partes.length - 1].charAt(0)).toUpperCase();
   }
 
+  /**
+   * Valida se o CPF informado é válido através do cálculo de dígitos verificadores.
+   * @param cpf String contendo o CPF, com ou sem máscara
+   * @returns true se o CPF for válido, false caso contrário
+   */
   private validarCPF(cpf: string): boolean {
     const numeros = cpf.replace(/\D/g, '');
     if (numeros.length !== 11 || /^(\d)\1+$/.test(numeros)) return false;
@@ -50,6 +61,11 @@ export class CadastroComponent {
     return resto === parseInt(numeros[10]);
   }
 
+  /**
+   * Realiza a validação de todos os campos do formulário de cadastro.
+   * Popula o objeto 'erros' com mensagens apropriadas caso as validações falhem.
+   * @returns true se todos os campos estiverem válidos, false caso haja algum erro
+   */
   private validarCampos(): boolean {
     this.erros = {};
 
@@ -97,6 +113,10 @@ export class CadastroComponent {
     return Object.keys(this.erros).length === 0;
   }
 
+  /**
+   * Valida os campos preenchidos e conclui o cadastro salvando os dados
+   * no AuthService, em seguida exibe mensagem de sucesso e redireciona para o login.
+   */
   concluirCadastro() {
     if (!this.validarCampos()) return;
 

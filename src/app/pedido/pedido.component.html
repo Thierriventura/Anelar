@@ -24,8 +24,7 @@
 
     <div class="formas-grid">
         @for (forma of formas; track forma.id) {
-        <button class="forma-card" [class.selecionada]="formaSelecionada === forma.id"
-            (click)="selecionar(forma.id)">
+        <button class="forma-card" [class.selecionada]="formaSelecionada === forma.id" (click)="selecionar(forma.id)">
             <span class="forma-icon">{{ forma.icon }}</span>
             <span class="forma-label">{{ forma.label }}</span>
             <span class="forma-desc">{{ forma.desc }}</span>
@@ -37,7 +36,7 @@
     <!-- Desconto débito -->
     @if (formaSelecionada === 'debito') {
     <div class="info-box info-desconto">
-        <strong>🏷 5% de desconto aplicado!</strong>
+        <strong> 5% de desconto aplicado!</strong>
         <span>Total com desconto:
             <strong>{{ totalComDesconto.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) }}</strong>
         </span>
@@ -63,7 +62,7 @@
     <!-- Info boleto -->
     @if (formaSelecionada === 'boleto') {
     <div class="info-box info-boleto">
-        <strong>📄 Boleto gerado após confirmação</strong>
+        <strong>Boleto gerado após confirmação</strong>
         <span>O prazo de pagamento é de <strong>3 dias úteis</strong>. Após o vencimento o pedido será cancelado.</span>
     </div>
     }
@@ -71,7 +70,7 @@
     <!-- Info pix -->
     @if (formaSelecionada === 'pix') {
     <div class="info-box info-pix">
-        <strong>⚡ Pagamento instantâneo via Pix</strong>
+        <strong> Pagamento instantâneo via Pix</strong>
         <span>Aprovação em segundos. O QR Code será exibido após a confirmação.</span>
     </div>
     }
@@ -82,8 +81,7 @@
 
     <div class="pagamento-footer">
         <button class="btn-voltar" (click)="router.navigate(['/lista-pedidos'])">← Voltar</button>
-        <button class="btn-confirmar" (click)="confirmarPagamento()"
-            [disabled]="!formaSelecionada">
+        <button class="btn-confirmar" (click)="confirmarPagamento()" [disabled]="!formaSelecionada">
             Confirmar Pagamento
         </button>
     </div>
